@@ -1,0 +1,55 @@
+@import 'var'
+
+//Media PC
+@media all and (min-width: 992px)
+
+  .grid-layout
+    width: 100vw
+    display: grid
+    grid-template-columns: 250px calc(100vw - 500px) 250px
+    grid-template-rows: 50px 1000px 50px
+    grid-template-areas: "top-bar top-bar top-bar" "content-left content-main content-right" "footer footer footer"
+
+//Media Tabletts
+@media all and (min-width: 600px) and (max-width: 992px)
+
+  .grid-layout
+    width: 100vw
+    display: grid
+    grid-template-columns: 150px calc(100vw - 300px) 150px
+    grid-template-rows: 50px 1000px 50px
+    grid-template-areas: "top-bar top-bar top-bar" "content-left content-main content-right" "footer footer footer"
+
+//Media Smartphone
+@media all and (max-width: 600px)
+
+  .grid-layout
+    width: 100vw
+    display: grid
+    grid-template-columns: 100vw
+    grid-template-rows: 50px 1000px 50px
+    grid-template-areas: "top-bar" "content-main" "footer"
+
+
+
+.top-bar
+  background: $prime
+  grid-area: top-bar
+  position: sticky
+  top: 0
+
+.content-left
+  background: $third
+  grid-area: content-left
+
+.content-main
+  background: $second
+  grid-area: content-main
+
+.content-right
+  background: $third
+  grid-area: content-right
+
+.footer
+  background: $prime
+  grid-area: footer

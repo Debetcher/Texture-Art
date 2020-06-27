@@ -23,6 +23,7 @@ const jshint = require('gulp-jshint');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
 
+
 // Define Important Varaibles
 const src = './src';
 const dest = './dist';
@@ -36,9 +37,7 @@ const reload = (done) => {
 // Function for serve the dev server in borwsaer
 const serve = (done) => {
     browserSync.init({
-        server: {
-            baseDir: `${dest}`
-        }
+      proxy: "http://localhost/Texture-Art/dist/"
     });
     done();
 };
@@ -99,6 +98,33 @@ const html = () => {
         .pipe(gulp.dest(`${dest}`));
 };
 
+// Compile .html to minify .html
+const php = () => {
+    // Find SASS
+    return gulp.src(`${src}/**/**/*.php`)
+
+        // Write everything to destination folder
+        .pipe(gulp.dest(`${dest}`));
+};
+// const php2 = () => {
+//     // Find SASS
+//     return gulp.src(`${src}/*/*.php`)
+//         // Init Plumber
+//         .pipe(plumber())
+//         // Compile SASS -> CSS
+//         .pipe(htmlmin({
+//           collapseWhitespace: true,
+//           removeComments: true,
+//           html5: true,
+//           removeEmptyAttributes: true,
+//           removeTagWhitespace: true
+//
+//         }))
+//         // Write everything to destination folder
+//         .pipe(gulp.dest(`${dest}`));
+// };
+
+
 // Compile .js to minify .js
 const script = () => {
     // Find SASS
@@ -134,13 +160,13 @@ const script = () => {
 };
 
 // Function to watch our Changes and refreash page
-const watch = () => gulp.watch([`${src}/*.html`, `${src}/js/**/*.js`, `${src}/sass/**/*.sass`], gulp.series(css, script, html, reload));
+const watch = () => gulp.watch([`${src}/*.html`, `${src}/**/**/*.php`, `${src}/js/**/*.js`, `${src}/sass/**/*.sass`], gulp.series(css, script, html, php, reload));
 
 // All Tasks for this Project
-const dev = gulp.series(css, script, html, serve, watch);
+const dev = gulp.series(css, script, html, php, serve, watch);
 
 // Just Build the Project
-const build = gulp.series(css, script, html);
+const build = gulp.series(css, script, html, php);
 
 // Default function (used when type gulp)
 exports.dev = dev;
