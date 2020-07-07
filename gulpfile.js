@@ -138,15 +138,13 @@ const script = () => {
         // concat
         .pipe(concat('concat.js'))
         // Use Babel
-        .pipe(babel())
+        .pipe(babel({
+            presets: ['@babel/preset-env']
+        }))
         // JavaScript Lint
         .pipe(jshint())
         // Report of jslint
         .pipe(jshint.reporter('jshint-stylish'))
-        // Add browser Support
-        .pipe(browserify({
-            insertGlobals: true
-        }))
         // Minify
         .pipe(uglify())
         // add SUffix
@@ -154,9 +152,7 @@ const script = () => {
         // Write Sourcemap
         .pipe(sourcemaps.write(''))
         // Write everything to destination folder
-        .pipe(gulp.dest(`${dest}/js`))
-        // Update Browser
-        .pipe(browserSync.stream());
+        .pipe(gulp.dest(`${dest}/js`));
 };
 
 // Function to watch our Changes and refreash page

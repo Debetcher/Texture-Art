@@ -12,6 +12,18 @@ class UserContr extends User {
 
   //kontrolliert, ob Benutzername und Passwort mit einem Benutzer in der Datenbank übereinstimmt.
 
+  public function getAllUsers(){
+
+    return $this->db_getAllUser();
+
+  }
+  public function getUserByID($id){
+
+    return $this->db_getUserByID($id);
+
+  }
+
+
 
   public function userLogin($username, $password){
 

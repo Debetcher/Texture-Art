@@ -27,6 +27,8 @@ if (!isset($_SESSION["username"])) {
 
 <div class="content-left">
 <!-- freier Bereich, der evtl für Side Bar genutzt wird -->
+
+<?php include "includes/side-bar.inc.php" ?>
 </div>
 
 <div class="content-main">
@@ -39,64 +41,46 @@ if (!isset($_SESSION["username"])) {
 
 $userV = new User\UserView($_SESSION["username"]);
 
-echo $userV->getUserName();
+
+$creator = new User\Creator($_SESSION["username"]);
 
 
 
 
 //checks if image is uploadet
 
-if (isset($_POST["submit"])) {
+if (isset($_POST["submitPP"])) {
 
   $file = $_FILES['file'];
 
-  $fileName = $file['name'];
-  $fileTMP = $file['tmp_name'];
-  $fileSize = $file['size'];
-  $fileError = $file['error'];
-  $fileType = $file['type'];
+  $upload = new FileUpload($file, "pp");
+  $upload->upload();
 
 
-  $fileExt = explode('.', $fileName);
-  $fileActualExt = strtolower(end($fileExt));
+}
+if (isset($_POST["submitBanner"])) {
 
-  $allowed = array('jpg', 'jpeg', 'png');
+  $file = $_FILES['file'];
 
-  if (in_array($fileActualExt, $allowed)) {
-
-    if ($fileError === 0) {
-
-      if ($fileSize < 1000000) {
-
-          $fileNameNew = uniqid('', true).".".$fileActualExt;
-          $fileDest = 'img/profile-pictures/'.$fileNameNew;
-
-          move_uploaded_file($fileTMP, $fileDest);
+  $upload = new FileUpload($file, "banner");
+  $upload->upload();
 
 
-          //Datenbank wird geupdated
+}
 
-          $userV->setUsername($_POST['username']);
-          $userV->setEmail($_POST['email']);
-          $userV->setProfilePicture($fileDest);
-          $userV->updateUser();
+if (isset($_POST['submitUN'])) {
 
+  $userV->setUsername($_POST['username']);
+}
 
+if (isset($_POST['submitDesc'])) {
 
+  $creator->setDescription($_POST['description']);
+}
 
-      }else {
-        echo "The file is too big";
-      }
+if (isset($_POST['submitEmail'])) {
 
-    }else{
-      echo "There was an Error";
-
-    }
-
-  }else {
-    echo "You cannot files of this type";
-  }
-
+  $userV->setEmail($_POST['email']);
 }
 
 
@@ -105,14 +89,34 @@ if (isset($_POST["submit"])) {
 
  ?>
 
-<form method="post" enctype="multipart/form-data" class="formular1">
+<form method="post" class="formular1">
 Username <br>
 <input type="text" name="username" class="form-control" value="<?php echo $userV->getUserName(); ?>"> <br>
+<input type="submit" name="submitUN" value="upload" class="btn btn-primary"> <br>
+
+</form>
+<form method="post" class="formular1">
 Email <br>
 <input type="text" name="email" class="form-control" value="<?php echo $userV->getEmail(); ?>"> <br>
+<input type="submit" name="submitMail" value="upload" class="btn btn-primary"> <br>
+
+</form>
+<form method="post" class="formular1">
+Description <br>
+<input type="text" name="description" class="form-control" value="<?php echo $creator->getDesc() ?>"> <br>
+<input type="submit" name="submitDesc" value="upload" class="btn btn-primary"> <br>
+
+</form>
+<form method="post" enctype="multipart/form-data" class="formular1">
 Profile Picture <br>
 <input type="file" name="file"> <br>
-<input type="submit" name="submit" value="upload" class="btn btn-primary"> <br>
+<input type="submit" name="submitPP" value="upload" class="btn btn-primary"> <br>
+
+</form>
+<form method="post" enctype="multipart/form-data" class="formular1">
+Banner <br>
+<input type="file" name="file"> <br>
+<input type="submit" name="submitBanner" value="upload" class="btn btn-primary"> <br>
 
 </form>
 

@@ -11,6 +11,8 @@
 
 <div class="content-left">
 <!-- freier Bereich, der evtl für Side Bar genutzt wird -->
+
+<?php include "includes/side-bar.inc.php" ?>
 </div>
 
 <div class="content-main">
@@ -34,13 +36,13 @@ $errors = $validation->validateForm();
 
 if ($errors == null) {
     $userC = new User\UserContr();
-    $userV = new User\UserView();
+    $userV = new User\UserView($_POST['username']);
 
-    if (!$userV->isUsernameAvaiable($_POST['username'])) {
+    if (!$userC->isUsernameAvaiable($_POST['username'])) {
       $validation->addError("username", "username is no avaible");
       $errors = $validation->validateForm();
 
-    }else if (!$userV->isEmailAvaiable($_POST['email'])) {
+    }else if (!$userC->isEmailAvaiable($_POST['email'])) {
       $validation->addError("email", "email is not avaiable");
       $errors = $validation->validateForm();
 
@@ -68,21 +70,34 @@ if ($errors == null) {
       <input type="text" name="username" class="form-control">
     </div>
 
-      <?php echo $errors['username'] ?? '' ?>
+      <?php
+      if (isset($errors['username'])) {
+        $validation->displayError($errors['username']);
+      }
+       ?>
+
 
     <div class="form-group">
       <label>Email</label>
       <input type="email" name="email" class="form-control">
     </div>
 
-      <?php echo $errors['email'] ?? '' ?>
+    <?php
+    if (isset($errors['email'])) {
+      $validation->displayError($errors['email']);
+    }
+     ?>
 
     <div class="form-group">
       <label>Password</label>
       <input type="password" name="password" class="form-control">
     </div>
 
-    <?php echo $errors['password'] ?? '' ?>
+    <?php
+    if (isset($errors['password'])) {
+      $validation->displayError($errors['password']);
+    }
+     ?>
 
     <div class="form-group form-check">
       <input type="checkbox" class="form-check-input">

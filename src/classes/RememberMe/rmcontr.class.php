@@ -9,7 +9,10 @@ class rmContr extends rm {
 
     //löscht vorhandene COOKIES
     if (isset($_COOKIE["RMtoken"])) {
-      setcookie("RMtoken","",time() - 3600);
+
+      setcookie("RMtoken", $hashToken, time() - 60, "/");
+      setcookie("RMID", $userID, time() - 60, "/");
+
     }
     //löscht Datenbank einträge
     $this->deleteRM($userID);
@@ -44,13 +47,19 @@ class rmContr extends rm {
         $hashed_token = $_COOKIE['RMtoken'];
 
         if (password_verify($db_token, $hashed_token)) {
-          return true;
+
+
+          return $userID;
+
+
+
         }
       }
 
     }
 
   }
+
 
 
 }

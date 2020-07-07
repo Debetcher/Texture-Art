@@ -33,19 +33,6 @@ class FormValidator {
       return $this->errors;
 
 
-
-
-    // foreach(self::$fields as $field){
-    //   if(!array_key_exists($field, $this->data)){
-    //     trigger_error("'$field' is not present in the data");
-    //     return;
-    //   }
-    // }
-    //
-    // $this->validateUsername();
-    // $this->validateEmail();
-    // return $this->errors;
-
   }
 
   private function validateUsername(){
@@ -96,6 +83,23 @@ class FormValidator {
   public function addError($key, $val){
     $this->errors[$key] = $val;
   }
+
+
+
+  public function displayError($errors){
+
+    if (isset($errors) && $errors != null) {
+      ?>
+      <div class="alert alert-danger" role="alert">
+      <?php echo $errors ?? '' ?>
+      </div>
+      <?php
+    }
+
+
+
+  }
+
 
 }
 

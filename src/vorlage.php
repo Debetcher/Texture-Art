@@ -11,6 +11,8 @@
 
 <div class="content-left">
 <!-- freier Bereich, der evtl für Side Bar genutzt wird -->
+
+<?php include "includes/side-bar.inc.php" ?>
 </div>
 
 <div class="content-main">

@@ -6,13 +6,13 @@ class UserView extends User {
 
 //Attributes
 
-  private $id;
-  private $username;
-  private $email;
-  private $password;
-  private $activation_key;
-  private $profile_picture;
-  private $roles;
+  protected $id;
+  protected $username;
+  protected $email;
+  protected $password;
+  protected $activation_key;
+  protected $profile_picture;
+  protected $roles;
 
 
 
@@ -65,27 +65,27 @@ class UserView extends User {
   public function setUsername($username){
 
     $this->username = $username;
+
+    $this->db_updateUsername($username, $this->getID());
   }
+
+
   public function setEmail($email){
 
     $this->email = $email;
+
+    $this->db_updateUsername($email, $this->getID());
   }
   public function setProfilePicture($profilePicture){
 
-    $this->$profile_picture = $profilePicture;
-  }
-  public function setPassword($password){
+    $this->profile_picture = $profilePicture;
 
-    $this->password = $password;
+    $this->db_updatePP($profilePicture, $this->getID());
   }
 
 //methods
 
-  public function updateUser(){
 
-    $this->db_updateUser($this->username, $this->email, $this->$profile_picture, $this->password, $this->id);
-
-  }
 
   public function deleteUser(){
 

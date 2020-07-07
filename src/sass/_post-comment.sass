@@ -1,0 +1,52 @@
+@import 'var'
+
+.posts-container
+  width: 100%
+  display: flex
+  flex-direction: column
+
+
+.post-container
+  width: calc(100% - 20px)
+  margin: 10px
+  min-height: 120px
+  background: $prime
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+
+.post-left
+  margin: 20px
+  min-height: 120px
+  width: 70%
+
+.post-right
+  margin: 20px
+  min-height: 120px
+  width: 20%
+  display: flex
+  align-items: flex-end
+  flex-direction: column
+
+
+
+.post-left-title
+  font-size: 20px
+  margin-bottom: 20px
+
+.post-left-text
+  margin-bottom: 30px
+
+.post-left-replie
+  margin-top: 10px
+  display: flex
+  align-items: flex-start
+
+.replie-input
+  width: 80%
+  height: 60px
+  background: $second
+  margin-left: 10px
+  border: none
+  margin-right: 10px
+  margin-left: 10px

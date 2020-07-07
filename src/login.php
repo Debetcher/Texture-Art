@@ -41,9 +41,16 @@ if ($errors == null) {
 
       $userV = new User\UserView($_POST['username']);
 
-      $rmC = new RememberMe\rmContr;
-      $rmC->createRM( $userV->getID());
+      echo $_POST['rm'];
+
+      if ($_POST['rm']) {
+
+        $rmC = new RememberMe\rmContr;
+        $rmC->createRM( $userV->getID());
+      }
+
       $_SESSION["username"] = $_POST['username'];
+      header("Location:index.php");
 
     }else {
       echo "Username or Password are wrong";
@@ -77,7 +84,7 @@ if ($errors == null) {
     <?php echo $errors['password'] ?? '' ?>
 
     <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input">
+      <input type="checkbox" name="rm" class="form-check-input">
       <label class="form-check-label" for="exampleCheck1">Remember Me</label>
     </div>
 
