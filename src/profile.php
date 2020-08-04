@@ -42,6 +42,7 @@ if (!$userC->isUsernameAvaiable($_GET['un'])) {
 
     <div class="ui-left-pp">
       <img class="ui-left-pp-li" src="<?php echo $user->getProfilePicture(); ?>">
+
     </div>
     <div class="ui-left-un_desc">
       <div class="ui-left-un">
@@ -106,15 +107,20 @@ if (!$userC->isUsernameAvaiable($_GET['un'])) {
 <div class="usermenu-nav-bar">
 
   <ul>
-    <li>Texturepacks</li>
-    <li>Posts</li>
+
+    <li id="tp-load">Texturepacks</li>
+    <li id="post-load">Posts</li>
     <li>Social Media</li>
     <li>Contact Me</li>
   </ul>
 
 </div>
 
-<div class="posts-container">
+
+<!-- ################################################################################ -->
+<!-- Posts Container -->
+<!-- ################################################################################ -->
+<div class="profile-posts-container">
 
 <?php
 
@@ -175,7 +181,13 @@ foreach ($postG->getPosts("Debe123") as $key => $value) {
 
 </div>
 
+<!-- ################################################################################ -->
+<!-- Packs Container -->
+<!-- ################################################################################ -->
 
+<div class="profile-packs-container">
+  hallo hier kommen packs hin
+</div>
 
 
 
@@ -204,13 +216,6 @@ foreach ($postG->getPosts("Debe123") as $key => $value) {
 
 
 <!-- JS Import -->
-<!-- JQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<!-- Popper CDN -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<!-- Bootstrap -->
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<!-- Main JS -->
-<script src="./js/main.min.js"></script>
+<?php include "includes/js-imports.inc.php" ?>
 
 </html>

@@ -36,7 +36,6 @@ $errors = $validation->validateForm();
 
 if ($errors == null) {
     $userC = new User\UserContr();
-    $userV = new User\UserView($_POST['username']);
 
     if (!$userC->isUsernameAvaiable($_POST['username'])) {
       $validation->addError("username", "username is no avaible");
@@ -61,6 +60,11 @@ if ($errors == null) {
  ?>
 
 
+
+
+
+<!-- ############################################################################### -->
+<!-- ############################################################################### -->
 <!-- Begin des Formulares -->
 <div class="formular1">
   <form method="post">
@@ -133,13 +137,6 @@ if ($errors == null) {
 
 
 <!-- JS Import -->
-<!-- JQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<!-- Popper CDN -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<!-- Bootstrap -->
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<!-- Main JS -->
-<script src="./js/main.min.js"></script>
+<?php include "includes/js-imports.inc.php" ?>
 
 </html>

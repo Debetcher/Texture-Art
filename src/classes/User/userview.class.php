@@ -80,7 +80,7 @@ class UserView extends User {
 
     $this->profile_picture = $profilePicture;
 
-    $this->db_updatePP($profilePicture, $this->getID());
+    $this->db_updatePP("img/profile-pictures/" . $profilePicture, $this->getID());
   }
 
 //methods

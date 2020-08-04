@@ -1,3 +1,4 @@
+
 let toggleSideBarStatus = true;
 
 var ud_element = document.getElementById('side-bar-btn');
@@ -5,6 +6,7 @@ ud_element.addEventListener('click', toggleSideBar , false);
 
 
 function toggleSideBar(){
+
 
   let getSideBar = document.querySelector(".side-bar");
 

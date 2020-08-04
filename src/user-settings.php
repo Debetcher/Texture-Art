@@ -40,9 +40,8 @@ if (!isset($_SESSION["username"])) {
 <?php
 
 $userV = new User\UserView($_SESSION["username"]);
-
-
 $creator = new User\Creator($_SESSION["username"]);
+$upload = new FileUpload();
 
 
 
@@ -53,8 +52,7 @@ if (isset($_POST["submitPP"])) {
 
   $file = $_FILES['file'];
 
-  $upload = new FileUpload($file, "pp");
-  $upload->upload();
+  $upload->uploadPP($file);
 
 
 }
@@ -62,8 +60,8 @@ if (isset($_POST["submitBanner"])) {
 
   $file = $_FILES['file'];
 
-  $upload = new FileUpload($file, "banner");
-  $upload->upload();
+  $upload = new FileUpload();
+  $upload->uploadBanner($file);
 
 
 }
@@ -146,13 +144,6 @@ Banner <br>
 
 
 <!-- JS Import -->
-<!-- JQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<!-- Popper CDN -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<!-- Bootstrap -->
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<!-- Main JS -->
-<script src="./js/main.min.js"></script>
+<?php include "includes/js-imports.inc.php" ?>
 
 </html>

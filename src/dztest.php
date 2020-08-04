@@ -11,6 +11,8 @@
 
 <div class="content-left">
 <!-- freier Bereich, der evtl für Side Bar genutzt wird -->
+
+<?php include "includes/side-bar.inc.php" ?>
 </div>
 
 <div class="content-main">
@@ -19,10 +21,11 @@
 <!-- ############################################### -->
 <!-- Start Content -->
 
-
-<input type="file" class="filepond" name="filepond">
-
-
+<form action="/file-upload" class="dropzone">
+  <div class="fallback">
+    <input name="file" type="file" multiple />
+  </div>
+</form>
 
 
 
@@ -48,17 +51,6 @@
 
 
 <!-- JS Import -->
-
-<!-- JQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<!-- Popper CDN -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<!-- Bootstrap -->
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<!-- Main JS -->
-
-<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-
-<script src="./js/main.min.js"></script>
+<?php include "includes/js-imports.inc.php" ?>
 
 </html>

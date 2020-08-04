@@ -57,6 +57,7 @@
         "@fortawesome/fontawesome-free": "^5.13.1",
         "bootstrap": "^4.5.0",
         "bootstrap-icons": "^1.0.0-alpha4",
-        "filepond": "^4.17.1"
+        "filepond": "^4.17.1",
+        "jsdoc": "^3.6.4"
     }
 }

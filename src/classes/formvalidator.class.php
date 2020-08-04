@@ -4,10 +4,15 @@ class FormValidator {
 
   private $data;
   private $errors = [];
-  private $fields = ['username', 'email', 'password'];
+  private $fields = ['username', 'email', 'password', 'packname','packname-ig', 'description'];
 
   public function __construct($post_data){
     $this->data = $post_data;
+  }
+
+  public function changeFields($fields){
+    $this->fields = $fields;
+
   }
 
   public function validateForm(){
@@ -18,6 +23,7 @@ class FormValidator {
 
         if ($key == 'username') {
           $this->validateUsername();
+
         }
         else if ($key == 'email') {
           $this->validateEmail();
@@ -25,6 +31,17 @@ class FormValidator {
         else if ($key == 'password') {
           $this->validatePassword();
         }
+        else if ($key == 'packname') {
+          $this->validatePackName();
+        }
+        else if ($key == 'packname-ig') {
+          $this->validatePackNameIG();
+        }
+        else if ($key == 'description') {
+          $this->validateDesc();
+        }
+
+
 
 
 
@@ -42,10 +59,12 @@ class FormValidator {
     if(empty($val)){
       $this->addError('username', 'username cannot be empty');
     } else {
-      if(!preg_match('/^[a-zA-Z0-9]{6,12}$/', $val)){
+      if(!preg_match('/^[a-zA-Z0-9 ]{3,20}$/', $val)){
         $this->addError('username','username must be 6-12 chars & alphanumeric');
       }
     }
+
+
 
   }
 
@@ -79,6 +98,50 @@ class FormValidator {
     }
 
   }
+  private function validatePackName(){
+
+    $val = trim($this->data['packname']);
+
+    if(empty($val)){
+      $this->addError('packname', 'Texturepack name cannot be empty');
+    } else {
+      if(!preg_match('/^[ A-Za-z0-9_@.#&+()]{3,30}$/', $val)){
+        $this->addError('packname','Texturepack name must be 3-20 chars & alphanumeric');
+      }
+    }
+
+  }
+  private function validatePackNameIG(){
+
+    $val = trim($this->data['packname-ig']);
+
+    if(empty($val)){
+      $this->addError('packname-ig', 'Texturepack ingame name cannot be empty');
+    } else {
+      if(!preg_match('/^[ A-Za-z0-9_@.#&+()]{3,30}$/', $val)){
+        $this->addError('packname-ig','Texturepack ingame name must be 3-30 chars & alphanumeric');
+      }
+    }
+
+  }
+  private function validateDesc(){
+
+    $val = trim($this->data['description']);
+
+    if(empty($val)){
+      $this->addError('description', 'Description cannot be empty');
+    } else {
+      if(!preg_match('/^[a-zA-Z0-9 ]{5,200}$/', $val)){
+        $this->addError('description','Description must be 5-200 chars & alphanumeric');
+      }
+    }
+
+  }
+
+
+
+
+
 
   public function addError($key, $val){
     $this->errors[$key] = $val;
@@ -101,6 +164,9 @@ class FormValidator {
   }
 
 
-}
 
+
+
+
+}
 ?>

@@ -6,8 +6,8 @@
 <div class="left-top_bar">
 
   <ul>
-    <li><a href="#"><i class="fas fa-bars icons" id="side-bar-btn"></i></a></li>
-    <li><div class="div-logo"></div></li>
+    <li><a href="#"><i class="fas fa-bars" id="side-bar-btn"></i></a></li>
+    <li><div class="div-logo"><img src="img/logo_name.png" onClick="window.location = 'index.php'"></div></li>
   </ul>
 
 </div>
@@ -18,7 +18,7 @@
 
   <ul>
     <li class="div-search-input"><input type="text" name="search-input" placeholder="Searching..."></li>
-    <li><a href="#"><i class="fas fa-search icons20"></i></a></li>
+    <li><a href="#"><i class="fas fa-search"></i></a></li>
 
 
   </ul>
@@ -32,6 +32,36 @@
 <div class="right-top_bar">
 
   <ul>
+
+
+<!-- Wenn der Benutzer ein Creator ist -->
+<li><a href="create-pack.php"><i class="fas fa-plus"></i></a></li>
+
+
+
+<li><a class="link-items"><i class="fas fa-bell">
+
+  <div class="notification-number">
+    8
+  </div>
+
+
+</i></a></li>
+
+
+
+<li><a class="link-items"><i class="fas fa-users">
+
+  <div class="notification-number">
+    3
+  </div>
+
+</i></a></li>
+
+
+
+
+
 <?php
 if (isset($_SESSION['username'])) {
   $tempUser = new User\UserView($_SESSION['username']);
@@ -50,7 +80,7 @@ if (isset($_SESSION['username'])) {
 
  ?>
 
-<li><a href="#"><i class="fas fa-cog icons"></i></a></li>
+<li><a href="user-settings.php"><i class="fas fa-cog"></i></a></li>
 
 
 </ul>
@@ -96,6 +126,8 @@ if (isset($_SESSION['username'])) {
       <a href="user-settings.php"><li class="item"><i class="fas fa-user-cog"></i> &nbsp; Settings</li></a>
       <a href="logout.php"><li class="item"><i class="fas fa-sign-out-alt"></i> &nbsp; Logout</li></a>
 
+
+
       <?php
     }else {
 
@@ -105,6 +137,7 @@ if (isset($_SESSION['username'])) {
       <!-- Wenn kein Benutzer angemeldet ist -->
       <a href="login.php"><li class="item"><i class="fas fa-user-circle"></i> &nbsp; Login</li></a>
       <a href="register.php"><li class="item"><i class="fas fa-user-circle"></i> &nbsp; Register</li></a>
+
 
 
       <?php

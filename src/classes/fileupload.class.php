@@ -1,41 +1,16 @@
 <?php
 
+
+
 class FileUpload {
 
-  private $data;
-  private $errors = [];
-  private $poss_ar = ['pp', 'banner', 'pack', 'screen'];
-  private $poss;
 
-  public function __construct($post_data, $poss){
-    $this->data = $post_data;
-    $this->poss = $poss;
-  }
-
-  public function upload(){
-
-      if (in_array($this->poss, $this->poss_ar)) {
-
-        if ($this->poss == 'pp') {
-          $this->uploadPP();
-        }
-        if ($this->poss == 'banner') {
-          $this->uploadBanner();
-        }
+  public $errors = [];
 
 
+  public function uploadPP($data){
 
-
-      }
-
-      return $this->errors;
-
-
-  }
-
-  private function uploadPP(){
-
-    $file = $this->data;
+    $file = $data;
 
     $fileName = $file['name'];
     $fileTMP = $file['tmp_name'];
@@ -70,9 +45,9 @@ class FileUpload {
     }
   }
 
-  private function uploadBanner(){
+  public function uploadBanner($data){
 
-    $file = $this->data;
+    $file = $data;
 
     $fileName = $file['name'];
     $fileTMP = $file['tmp_name'];
@@ -96,15 +71,50 @@ class FileUpload {
             $creator->setBanner($fileDest);
 
         }else {
+          addError("banner", "The File is to big");
+        }
+      }else{
+        addError("banner", "There was an error");
+      }
+    }else {
+      addError("banner", "You cannot upload files of this type");
+    }
+  }
+
+  public function uploadPack($data, $name){
+
+    $file = $data;
+
+    $fileName = $file['name'];
+    $fileTMP = $file['tmp_name'];
+    $fileSize = $file['size'];
+    $fileError = $file['error'];
+    $fileType = $file['type'];
+
+    $fileExt = explode('.', $fileName);
+    $fileActualExt = strtolower(end($fileExt));
+    $allowed = array('zip');
+
+    if (in_array($fileActualExt, $allowed)) {
+      if ($fileError === 0) {
+        if ($fileSize < 100000000) {
+
+            $fileNameNew = $name.".zip";
+            $fileDest = 'packs/'.$fileNameNew;
+            move_uploaded_file($fileTMP, $fileDest);
+
+
+        }else {
           echo "The file is too big";
         }
       }else{
         echo "There was an Error";
       }
     }else {
-      echo "You cannot files of this type";
+      $this->addError("pack", "You cannot upload files of this type");
     }
   }
+
 
 
 
@@ -118,12 +128,12 @@ class FileUpload {
 
 
 
-  public function displayError($errors){
+  public function displayError($type){
 
-    if (isset($errors) && $errors != null) {
+    if (isset($this->errors['pack']) && $this->errors['pack'] != null) {
       ?>
       <div class="alert alert-danger" role="alert">
-      <?php echo $errors ?? '' ?>
+      <?php echo $this->errors['pack'] ?? '' ?>
       </div>
       <?php
     }

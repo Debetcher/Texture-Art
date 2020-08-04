@@ -27,6 +27,57 @@
 
 
 
+<div class="packs-container">
+
+
+<?php
+$packs = new Pack\PackContr;
+
+
+foreach ($packs->getPacks() as $key => $value) {
+  ?>
+  <a style="text-decoration:none" href="pack.php?pack=<?php echo $value['id'] ?> ">
+  <div class="pack-container">
+
+    <div class="pack-image">
+      <img src=<?php echo $value["pack_picture"]; ?> >
+    </div>
+    <div class="pack-title">
+      <?php echo $value['name']; ?>
+    </div>
+    <div class="pack-data">
+
+      <div class="pack-creators">
+        <?php
+
+        foreach ($packs->getCreatorsByID($value['id']) as $keyCreate => $valueCreate) {
+          echo "<p>" . $valueCreate['username'] . "</p>";
+        }
+
+         ?>
+
+      </div>
+      <div class="pack-dl">
+        <button type="button" class="btn btn-primary" name="button">Download</button>
+        <p><?php echo $value['downloads']; ?> Downloads</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <?php
+}
+ ?>
+</a>
+
+
+
+</div>
+
+
+
+
 <!-- End Content -->
 <!-- ############################################### -->
 <!-- ############################################### -->
@@ -47,13 +98,6 @@
 
 
 <!-- JS Import -->
-<!-- JQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<!-- Popper CDN -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<!-- Bootstrap -->
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<!-- Main JS -->
-<script src="./js/main.min.js"></script>
+<?php include "includes/js-imports.inc.php" ?>
 
 </html>
