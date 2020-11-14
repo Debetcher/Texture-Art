@@ -192,16 +192,6 @@ if (isset($_POST['submitVersion'])) {
 
 
 
-
-
-
-
-
-
-
-
-
-
  ?>
 
 
@@ -228,6 +218,125 @@ if (isset($errors['packname'])) {
 
 
 
+<!-- ################################################################################ -->
+<!-- ################################################################################ -->
+<!-- Formular Creator Collab -->
+<form method="post" class="formular1">
+
+Invite Creators <br><br>
+
+<input type="text" name="username" class="form-control" data-parsley-username-exist> <br>
+
+<input type="submit" name="submitIC" value="Invite" class="btn btn-primary"> <br> <br>
+
+
+<?php
+
+if (isset($_POST['submitIC'])) {
+
+
+
+  $piContr = new PackInvite\PackInviteContr;
+  $userContr = new User\UserContr;
+
+  $session = $userContr->getUserByUsername($_SESSION['username'])[0]['id'];
+  $post = $userContr->getUserByUsername($_POST['username'])[0]['id'];
+
+  $piContr->setPI($post, $session, $pack_id);
+
+
+
+}
+
+
+
+ ?>
+
+
+
+
+
+
+Invited Creators <br> <br>
+
+
+<table class="table table-striped table-dark ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+
+    $piContr = new PackInvite\PackInviteContr;
+
+    foreach ($piContr->getPIBYPack($pack_id) as $key => $value) {
+      ?>
+      <tr>
+        <th scope="row"><?php echo $key+1; ?></th>
+        <td><?php echo $value["username"]; ?></td>
+        <td>waiting...</td>
+        <td>
+          <input type="button" name="withdraw" value="revoke" class=" table-btn btn-danger">
+        </td>
+      </tr>
+      <?php
+    }
+
+
+     ?>
+
+  </tbody>
+</table>
+
+
+<br>
+
+
+Members <br> <br>
+
+
+<table class="table table-striped table-dark ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+      foreach ($packInstanz->getCreator() as $key => $value) {
+        ?>
+        <tr>
+          <th scope="row"><?php echo $key+1; ?></th>
+          <td><?php echo $value["username"]; ?></td>
+          <td>
+            <input type="button" name="kick" value="kick" class=" table-btn btn-danger">
+
+
+
+          </td>
+        </tr>
+        <?php
+      }
+
+
+     ?>
+
+  </tbody>
+</table>
+
+
+
+
+</form>
+
+
 
 
 
@@ -240,7 +349,74 @@ if (isset($errors['packname'])) {
 
 Texturepack name ingame <br><br>
 
-<input type="text" name="packname-ig" class="form-control" value="<?php echo $packInstanz->getIGName(); ?>"> <br>
+<div class="IG-settings-container">
+  <div class="IG-colors-container">
+    <div id="inputCBlack" style="background:#000000;"></div>
+    <div id="inputCDarkBlue" style="background:#0000AA;"></div>
+    <div id="inputCDarkGreen" style="background:#00AA00;"></div>
+    <div id="inputCDarkAqua" style="background:#00AAAA;"></div>
+    <div id="inputCDarkRed" style="background:#AA0000;"></div>
+    <div id="inputCDarkPurple" style="background:#AA00AA;"></div>
+    <div id="inputCGold" style="background:#FFAA00;"></div>
+    <div id="inputCGray" style="background:#AAAAAA;"></div>
+    <div id="inputCDarkGrey" style="background:#555555;"></div>
+    <div id="inputCBlue" style="background:#5555FF;"></div>
+    <div id="inputCGreen" style="background:#55FF55;"></div>
+    <div id="inputCAqua" style="background:#55FFFF;"></div>
+    <div id="inputCRed" style="background:#FF5555;"></div>
+    <div id="inputCLightPurple" style="background:#FF55FF;"></div>
+    <div id="inputCYellow" style="background:#FFFF55;"></div>
+    <div id="inputCWhite" style="background:#FFFFFF;"></div>
+
+  </div>
+  <div class="IG-formats-container">
+
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+          <label class="form-check-label" for="gridRadios1">
+            Normal
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+          <label class="form-check-label" for="gridRadios2">
+            <u style="text-decoration:underline">Underline</u>
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+          <label class="form-check-label" for="gridRadios3">
+            <i>Italic</i>
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option4">
+          <label class="form-check-label" for="gridRadios4">
+            <strike style="text-decoration: line-through">Strikethrough</strike>
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="option5">
+          <label class="form-check-label" for="gridRadios5">
+            <b>Bold</b>
+          </label>
+        </div>
+
+
+  </div>
+</div>
+
+Pack Title Ingame:<br>
+
+<input type="text" id="IG-input" name="packname-ig" class="form-control" value="<?php echo $packInstanz->getIGName(); ?>">
+
+
+
+
+<br>
+Pack Title:<br>
+<label id="IG-output"> </label><br>
 
 <!-- Fehlermeldung -->
 <?php

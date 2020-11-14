@@ -25,6 +25,7 @@
 <?php
 
 $pack_id = $_GET['pack'];
+$packInstanz = new Pack\PackInstanz($pack_id);
 
 $screenContr = new Screen\ScreenContr;
 
@@ -33,15 +34,76 @@ $screenContr = new Screen\ScreenContr;
 
  ?>
 
+<div class="pack-info">
+
+  	<div class="pack-info-left">
+
+      <div class="pack-info-left-left">
+        <img src="img/pack-picture/82.png" alt="">
+      </div>
+      <div class="pack-info-left-right">
+        <div class="pack-info-left-right-title">
+          <?php echo $packInstanz->getName(); ?>
+        </div>
+        <div class="pack-info-left-right-Creator">
+          Creator:
+          <br>
+          <?php
+          foreach ($packInstanz->getCreator() as $key => $value) {
+            echo $value['username'];
+            echo "<br>";
+          }
+
+           ?>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+    <div class="pack-info-center">
+
+      <div>
+        Downloads:<br>
+        <span>123.456</span>
+
+      </div>
+      <div>
+        Likes:<br>
+        <span>123.456</span>
+
+      </div>
+
+
+    </div>
+    <div class="pack-info-right">
+      <div class="">
+        <i class="far fa-heart"></i>
+      </div>
+      <div class="">
+        <button type="button" name="download" class="btn btn-primary">Download</button>
+      </div>
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
 
  <!-- ############################################### -->
  <!-- ############################################### -->
  <!-- Start Carousell -->
 
 <div class="out-box">
-
-
-
  <div id="carouselExampleCaptions" class="carousel slide carousel-main" data-ride="carousel">
    <ol class="carousel-indicators">
       <?php
@@ -54,7 +116,6 @@ $screenContr = new Screen\ScreenContr;
         }
       }
        ?>
-
    </ol>
    <div class="carousel-inner">
 
@@ -71,8 +132,6 @@ $screenContr = new Screen\ScreenContr;
                  <p><?php echo $value['description']; ?></p>
                </div>
              </div>
-
-
              <?php
            }else {
              ?>
@@ -88,9 +147,6 @@ $screenContr = new Screen\ScreenContr;
            }
        }
      ?>
-
-
-
    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
      <span class="sr-only">Previous</span>

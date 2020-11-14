@@ -6,6 +6,7 @@ class UserContr extends User {
 
   public function createUser($username, $email, $password){
 
+
     $this->db_setUser($username, $email, $password);
 
   }
@@ -22,8 +23,11 @@ class UserContr extends User {
     return $this->db_getUserByID($id);
 
   }
+  public function getUserByUsername($username){
 
+    return $this->db_getUserByUsername($username);
 
+  }
 
   public function userLogin($username, $password){
 
@@ -57,6 +61,36 @@ class UserContr extends User {
 
 
   }
+
+
+
+  public function searchUsers($value){
+
+    return $this->db_searchUsers($value);
+
+
+  }
+
+
+  public function isUserAuthorized($action){
+
+    if (isset($_SESSION["username"])) {
+      if (!$this->isUsernameAvaiable($_SESSION["username"])) {
+        return $this->db_authorization($action, $this->getUserByUsername($_SESSION["username"])[0]["id"]);
+      }else {
+        return false;
+      }
+    }else {
+      return false;
+    }
+
+
+
+  }
+
+
+
+
 
 
 }

@@ -10,6 +10,13 @@ class PackContr extends Pack{
     return $this->db_getPacks();
 
   }
+  public function getPacksByDate(){
+
+    return $this->db_getPacksByDate();
+
+  }
+
+
   public function getIDByName($name){
 
     return $this->db_getIDbyName($name);
@@ -50,6 +57,26 @@ class PackContr extends Pack{
 
 
   }
+
+  public function checkIfPackExist($pack_name, $pack_ig, $pack_description){
+
+  return $this->db_checkIfEsists($pack_name, $pack_ig, $pack_description);
+
+  }
+
+
+
+
+
+
+  public function searchPacks($chars){
+
+
+  return $this->db_searchPacks($chars);
+
+  }
+
+
 
 
 

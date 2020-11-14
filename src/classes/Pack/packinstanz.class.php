@@ -43,6 +43,9 @@ class PackInstanz extends Pack {
     $this->likes = $packdata[0]["likes"];
     $this->downloads = $packdata[0]["downloads"];
 
+    $packContr = new \Pack\PackContr();
+    $this->creator = $packContr->getCreatorsByID($this->id);
+
 
   }
 
@@ -208,18 +211,6 @@ class PackInstanz extends Pack {
     $this->version = $value;
     return $this->db_updateVersion($versionID,  $this->id);
   }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

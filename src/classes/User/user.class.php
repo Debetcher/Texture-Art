@@ -59,7 +59,18 @@ class User extends \Database {
     return $results;
   }
 
+  protected function db_getUserByUsername($username){
+
+    $sql = "SELECT * FROM user WHERE username = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$username]);
+
+    $results = $stmt->fetchAll();
+    return $results;
+  }
+
   protected function db_setUser($username, $email, $password){
+
 
     $sql = "INSERT INTO user(username, email, password)VALUES (?,?,?)";
     $stmt = $this->connect()->prepare($sql);
@@ -133,6 +144,27 @@ class User extends \Database {
     $results = $stmt->fetchAll();
     return $results[0]["bool"];
 
+  }
+
+
+
+
+
+  //user searching algo.
+
+  protected function db_searchUsers($value){
+    $value = $value . '%';
+
+    $sql = "SELECT user.id, user.username, user.profile_picture, user.email, role.name FROM user
+            LEFT JOIN user_role ON user.id = user_role.user_id
+            LEFT JOIN role ON role.id = user_role.role_id
+            WHERE user.username LIKE ?
+            LIMIT 3";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$value]);
+
+    $results = $stmt->fetchAll();
+    return $results;
   }
 
 

@@ -56,7 +56,7 @@ class UserView extends User {
   }
   public function getRoles(){
 
-    return $this->roles;
+    return $this->roles[0]["name"];
   }
 
 

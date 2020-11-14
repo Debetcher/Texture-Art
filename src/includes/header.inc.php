@@ -1,7 +1,5 @@
-<?php session_start(); ?>
-
 <!DOCTYPE html>
-<html class="fPage" lang="en">
+<html class="fPage" id="fP" lang="en">
 
 <head>
 
@@ -13,7 +11,13 @@
     <!-- Titel -->
     <title>Texture Art</title>
 
+
+    <!-- MC font -->
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/minecraftia" type="text/css"/>
+
     <!-- SASS Import -->
+
+
     <link rel="stylesheet" href="./css/main.min.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
@@ -36,6 +40,22 @@ $rmC = new RememberMe\rmContr;
 if (isset($_SESSION['username'])) {
 
 $userInstanz = new User\UserView($_SESSION['username']);
+
+}
+
+
+
+
+function isAllowed($aktion){
+
+  if (isset($_SESSION['username'])) {
+
+    return $userInstanz->isAuthorized($action);
+
+  }else {
+    return false;
+  }
+
 
 }
 

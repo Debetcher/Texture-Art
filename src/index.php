@@ -2,6 +2,7 @@
 <?php include "includes/autoloader.inc.php" ?>
 <?php include "includes/header.inc.php" ?>
 
+
 <!-- Grid Layout -->
 <div class="grid-layout">
 
@@ -25,7 +26,7 @@
 <!-- Start Content -->
 
 
-
+<?php echo $_SESSION['username'] ?>
 
 <div class="packs-container">
 
@@ -34,12 +35,13 @@
 $packs = new Pack\PackContr;
 
 
-foreach ($packs->getPacks() as $key => $value) {
+foreach ($packs->getPacksByDate() as $key => $value) {
   ?>
-  <a style="text-decoration:none" href="pack.php?pack=<?php echo $value['id'] ?> ">
+  <a href="#" style="text-decoration:none">
   <div class="pack-container">
 
     <div class="pack-image">
+
       <img src=<?php echo $value["pack_picture"]; ?> >
     </div>
     <div class="pack-title">
@@ -58,18 +60,19 @@ foreach ($packs->getPacks() as $key => $value) {
 
       </div>
       <div class="pack-dl">
-        <button type="button" class="btn btn-primary" name="button">Download</button>
+        <button type="button" class="btn btn-primary dwl-btn" name="button">Download</button>
         <p><?php echo $value['downloads']; ?> Downloads</p>
       </div>
 
     </div>
 
   </div>
+  </a>
 
   <?php
 }
  ?>
-</a>
+
 
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace rememberme;
+namespace RememberMe;
 
 class rm extends \Database {
 

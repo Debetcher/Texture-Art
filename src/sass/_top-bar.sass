@@ -31,7 +31,7 @@
   height: 28px
   width: 200px
   display: flex
-  align-items: center
+  align-items: centera
 
 
 .div-logo img
@@ -88,40 +88,49 @@
 .right-top_bar ul li
   margin: 10px
 
+.right-top_bar ul li div
+  background-color: $prime
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2)
+  width: 250px
 
-.right-top_bar ul li img
-  width: 32px
-  height: 32px
-  border-radius: 32px
-  cursor: pointer
+.right-top_bar ul li div a
+  color: white
 
-.right-top_bar ul li img :hover
-  border-radius: 16px
-  background-color: green
+.right-top_bar ul li div a:hover
+  background-color: $second
+  color: white
 
-
-
-.link-items i
-
+.right-top_bar ul li div div
+  color: white
   display: flex
-  justify-content: flex-end
-  cursor: pointer
+  width: 248px
+  flex-direction: row
+  justify-content: space-around
+  align-items: center
 
 
+.pi-dropdown div a
+  width: 70%
 
-.notification-number
-  position: absolute
-  width: 12px
-  height: 12px
-  margin-left: 3px
+.right-top_bar ul li div div:hover
+  background-color: $second
+  color: white
 
-
-  border-radius: 12px
-  background-color: red
-  margin-top: -5px
-  float: right
-
-  font-size: 10px
+.right-top_bar ul li .picture
   display: flex
   justify-content: center
-  align-items: center
+  padding: 1em 0
+
+.right-top_bar ul li .picture:hover
+  background-color: $prime
+
+.right-top_bar ul li a img
+  width: 30px
+  height: 30px
+  border-radius: 100%
+
+
+.right-top_bar ul li .picture img
+  width: 8em
+  height: 8em
+  border-radius: 100%

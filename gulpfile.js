@@ -45,7 +45,7 @@ const serve = (done) => {
 // Compile sass into css with gulp
 const css = () => {
     // Find SASS
-    return gulp.src(`${src}/sass/**/*.sass`)
+    return gulp.src(`${src}/sass/*.sass`)
         // Init Plumber
         .pipe(plumber())
         // Lint SASS
@@ -74,6 +74,41 @@ const css = () => {
         .pipe(sourcemaps.write(''))
         // Write everything to destination folder
         .pipe(gulp.dest(`${dest}/css`))
+        // Reload Page
+        .pipe(browserSync.stream());
+};
+
+// Compile modules sass into css
+const modulecss = () => {
+    // Find SASS
+    return gulp.src(`${src}/**/**/*.sass`)
+        // Init Plumber
+        .pipe(plumber())
+        // Lint SASS
+        .pipe(sassLint({
+            options: {
+                formatter: 'stylish',
+            },
+            rules: {
+                'no-ids': 1,
+                'final-newline': 0,
+                'no-mergeable-selectors': 1,
+                'indentation': 0
+            }
+        }))
+        // Format SASS
+        .pipe(sassLint.format())
+        // Start Source Map
+        .pipe(sourcemaps.init())
+        // Compile SASS -> CSS
+        .pipe(sass.sync({ outputStyle: "compressed" })).on('error', sass.logError)
+
+        // Add Autoprefixer & cssNano
+        .pipe(postcss([autoprefixer(), cssnano()]))
+        // Write Source Map
+        .pipe(sourcemaps.write(''))
+        // Write everything to destination folder
+        .pipe(gulp.dest(`${dest}`))
         // Reload Page
         .pipe(browserSync.stream());
 };
@@ -155,14 +190,44 @@ const script = () => {
         .pipe(gulp.dest(`${dest}/js`));
 };
 
+
+// Compile .js to minify .js
+const modulescript = () => {
+    // Find SASS
+    return gulp.src(`${src}/**/**/*.module.js`)
+        // Init Plumber
+        .pipe(plumber(((error) => {
+            gutil.log(error.message);
+        })))
+        // Start useing source maps
+        .pipe(sourcemaps.init())
+
+        // Use Babel
+        .pipe(babel({
+            presets: ['@babel/preset-env']
+        }))
+        // JavaScript Lint
+        .pipe(jshint())
+        // Report of jslint
+        .pipe(jshint.reporter('jshint-stylish'))
+        // Minify
+        .pipe(uglify())
+        // add SUffix
+
+        // Write Sourcemap
+        .pipe(sourcemaps.write(''))
+        // Write everything to destination folder
+        .pipe(gulp.dest(`${dest}`));
+};
+
 // Function to watch our Changes and refreash page
-const watch = () => gulp.watch([`${src}/*.html`, `${src}/**/**/*.php`, `${src}/js/**/*.js`, `${src}/sass/**/*.sass`], gulp.series(css, script, html, php, reload));
+const watch = () => gulp.watch([`${src}/*.html`, `${src}/**/**/**/*.php`, `${src}/**/**/*.js`, `${src}/**/**/*.sass`], gulp.series(css, modulecss, script, modulescript, html, php, reload));
 
 // All Tasks for this Project
-const dev = gulp.series(css, script, html, php, serve, watch);
+const dev = gulp.series(css, modulecss, modulescript, script, html, php, serve, watch);
 
 // Just Build the Project
-const build = gulp.series(css, script, html, php);
+const build = gulp.series(css, modulecss, modulescript, script, html, php);
 
 // Default function (used when type gulp)
 exports.dev = dev;
