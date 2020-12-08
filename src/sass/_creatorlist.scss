@@ -1,0 +1,37 @@
+@import 'var';
+
+.creator-list {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searching-bar {
+  visibility: hidden;
+}
+
+
+.cl-left {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cll-picture img {
+  height: 100%;
+  max-height: 50px;
+  width: 50px;
+  padding: 5px;
+  object-fit: cover;
+}
+
+.cll-name {
+  font-size: 1em;
+}
+
+.cl-right {
+  margin-right: 10px;
+}

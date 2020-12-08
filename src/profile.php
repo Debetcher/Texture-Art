@@ -1,4 +1,3 @@
-<!-- Includes  -->
 <?php include "includes/autoloader.inc.php" ?>
 <?php include "includes/header.inc.php" ?>
 
@@ -66,17 +65,17 @@ if (!$userC->isUsernameAvaiable($_GET['un'])) {
         Downloads:
       </div>
       <div class="ui-center-big">
-        123.456
+        <?php echo $user->getDownloads() ?>
       </div>
 
 
     </div>
     <div class="ui-center-div">
       <div class="ui-center-little">
-        Ranking
+        Role:
       </div>
       <div class="ui-center-big">
-        4#
+        <?php echo $userV->getRoles(); ?>
       </div>
 
     </div>
@@ -104,89 +103,63 @@ if (!$userC->isUsernameAvaiable($_GET['un'])) {
 
 </div>
 
-<div class="usermenu-nav-bar">
+<div class="packs-container">
 
-  <ul>
-
-    <li id="tp-load">Texturepacks</li>
-    <li id="post-load">Posts</li>
-    <li>Social Media</li>
-    <li>Contact Me</li>
-  </ul>
-
-</div>
-
-
-<!-- ################################################################################ -->
-<!-- Posts Container -->
-<!-- ################################################################################ -->
-<div class="profile-posts-container">
 
 <?php
+$packs = new Pack\PackContr;
 
-$postG = new Post\PostGlobal;
 
-foreach ($postG->getPosts("Debe123") as $key => $value) {
+foreach ($packs->getPacksByUser($user->getID()) as $key => $value) {
   ?>
 
-  <div class="post-container">
 
-  <div class="post-left">
-    <div class="post-left-title">
-      <?php echo $value['title']; ?>
 
+  <article class="pack-container">
+    <div class="pack-img">
+      <img src="<?php echo $value["pack_picture"]; ?>" alt="Cannot display image!">
     </div>
-    <div class="post-left-text">
-      <?php echo $value['text']; ?>
+    <div class="pack-name">
+      <?php echo $value['name']; ?>
     </div>
-    <div class="post-left-replie">
-      <i class="fas fa-comments icons"></i>
-      <textarea name="name" class="replie-input" rows="8" cols="80" placeholder="write comment..."></textarea>
-      <i class="fas fa-share icons" ></i>
-    </div>
-
-  </div>
-  <div class="post-right">
-    <div class="date">
+    <div class="pack-creators">
       <?php
-      $phpdate = strtotime($value['date']);
-      $date = date( 'Y-m-d H:i:s', $phpdate );
-      echo $date;
+
+      foreach ($packs->getCreatorsByID($value['id']) as $keyCreate => $valueCreate) {
+        ?>
+          <a href="profile.php?un=<?php echo $valueCreate['username']; ?>">
+            <img src="<?php echo $valueCreate["profile_picture"]; ?>" alt="">
+            <p><?php echo $valueCreate["username"]; ?></p>
+            <br>
+          </a>
 
 
-      ?>
+        <?php
+
+      }
+
+       ?>
     </div>
-    <div class="author">
-      <?php echo $value['username']; ?>
+    <div class="pack-actions">
+
+      <a href="pack.php?pack=<?php echo $value['id'] ?>"> <button type="button" class="btn btn-primary" name="see_more">See more</button> </a>
+      <a href="includes/download.inc.php?file_path=<?php echo $value['path'] ?>">
+        <button type="button" class="btn btn-primary" name="download">Download</button>
+        <p><?php echo $value['downloads'] . " Downloads" ?></p>
+      </a>
+
+
     </div>
 
-  </div>
+  </article>
 
 
-
-
-
-
-  </div>
-
-  <?php
+<?php
 }
-
-
-
-
-
 
  ?>
 
-</div>
 
-<!-- ################################################################################ -->
-<!-- Packs Container -->
-<!-- ################################################################################ -->
-
-<div class="profile-packs-container">
-  hallo hier kommen packs hin
 </div>
 
 
@@ -194,6 +167,7 @@ foreach ($postG->getPosts("Debe123") as $key => $value) {
 
 
 
+<br>
 
 
 <!-- End Content -->

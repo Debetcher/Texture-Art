@@ -146,6 +146,20 @@ class User extends \Database {
 
   }
 
+  protected function db_getUserDownloads($username) {
+    $sql = "SELECT COUNT(user_download_pack.id) AS downloads from user_download_pack
+            JOIN pack ON pack.id = user_download_pack.pack_id
+            JOIN profile_pack ON profile_pack.pack_id = pack.id
+            JOIN user ON user.id = profile_pack.profile_id
+            WHERE user.username = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$username]);
+
+    $results = $stmt->fetchAll();
+    return $results;
+
+  }
+
 
 
 
@@ -159,6 +173,7 @@ class User extends \Database {
             LEFT JOIN user_role ON user.id = user_role.user_id
             LEFT JOIN role ON role.id = user_role.role_id
             WHERE user.username LIKE ?
+            AND role.name = 'creator'
             LIMIT 3";
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute([$value]);
@@ -166,6 +181,8 @@ class User extends \Database {
     $results = $stmt->fetchAll();
     return $results;
   }
+
+
 
 
 }

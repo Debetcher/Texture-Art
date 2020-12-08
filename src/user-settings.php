@@ -1,5 +1,3 @@
-
-<!-- Includes  -->
 <?php include "includes/autoloader.inc.php" ?>
 <?php include "includes/header.inc.php" ?>
 
@@ -40,8 +38,14 @@ if (!isset($_SESSION["username"])) {
 <?php
 
 $userV = new User\UserView($_SESSION["username"]);
-$creator = new User\Creator($_SESSION["username"]);
 $upload = new FileUpload();
+
+if ($userV->isAuthorized("creator")) {
+  $creator = new User\Creator($_SESSION["username"]);
+}
+
+
+
 
 
 
@@ -56,29 +60,34 @@ if (isset($_POST["submitPP"])) {
 
 
 }
-if (isset($_POST["submitBanner"])) {
-
-  $file = $_FILES['file'];
-
-  $upload = new FileUpload();
-  $upload->uploadBanner($file);
-
-
-}
 
 if (isset($_POST['submitUN'])) {
 
   $userV->setUsername($_POST['username']);
 }
 
-if (isset($_POST['submitDesc'])) {
-
-  $creator->setDescription($_POST['description']);
-}
-
 if (isset($_POST['submitEmail'])) {
 
   $userV->setEmail($_POST['email']);
+}
+
+if ($userV->isAuthorized("creator")) {
+
+  if (isset($_POST['submitDesc'])) {
+
+    $creator->setDescription($_POST['description']);
+  }
+
+  if (isset($_POST["submitBanner"])) {
+
+    $file = $_FILES['file'];
+
+    $upload = new FileUpload();
+    $upload->uploadBanner($file);
+
+
+  }
+
 }
 
 
@@ -99,24 +108,30 @@ Email <br>
 <input type="submit" name="submitMail" value="upload" class="btn btn-primary"> <br>
 
 </form>
-<form method="post" class="formular1">
-Description <br>
-<input type="text" name="description" class="form-control" value="<?php echo $creator->getDesc() ?>"> <br>
-<input type="submit" name="submitDesc" value="upload" class="btn btn-primary"> <br>
-
-</form>
 <form method="post" enctype="multipart/form-data" class="formular1">
 Profile Picture <br>
 <input type="file" name="file"> <br>
 <input type="submit" name="submitPP" value="upload" class="btn btn-primary"> <br>
 
 </form>
-<form method="post" enctype="multipart/form-data" class="formular1">
-Banner <br>
-<input type="file" name="file"> <br>
-<input type="submit" name="submitBanner" value="upload" class="btn btn-primary"> <br>
+<?php
+if ($userV->isAuthorized("creator")) {
+  ?>
+  <form method="post" class="formular1">
+  Description <br>
+  <input type="text" name="description" class="form-control" value="<?php echo $creator->getDesc() ?>"> <br>
+  <input type="submit" name="submitDesc" value="upload" class="btn btn-primary"> <br>
 
-</form>
+  </form>
+  <form method="post" enctype="multipart/form-data" class="formular1">
+  Banner <br>
+  <input type="file" name="file"> <br>
+  <input type="submit" name="submitBanner" value="upload" class="btn btn-primary"> <br>
+
+  </form>
+  <?php
+}
+ ?>
 
 
 

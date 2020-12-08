@@ -12,6 +12,7 @@ $userC = new User\UserContr;
 if (isset($_SESSION["username"])) {
   $userV = new User\UserView($_SESSION['username']);
 
+
 }
 
 
@@ -34,14 +35,13 @@ if (isset($_SESSION["username"])) {
 
 
 
-<div class="center-top_bar">
-
-  <ul>
-    <li  class="div-search-input"><input id="search-input" type="text" name="search-input" placeholder="Searching..."></li>
-    <li id="search-btn"><a href="#"><i class="fas fa-search"></i></a></li>
+<div class="center-top_bar" id="center-top_bar">
 
 
-  </ul>
+  <input id="search-input" type="text" name="search-input" placeholder="Searching...">
+
+
+
 
 </div>
 
@@ -104,11 +104,11 @@ if (isset($_SESSION["username"])) {
              <div class="request-letter">
                <b><?php echo $value["requested"]; ?></b> invited you to work on the pack <b><?php echo $value["name"]; ?></b>
              </div>
-             <div class="request-accept" >
+             <div class="request-accept">
                <i class="fas fa-check-circle"  style="color:#71E27F;" data-id="<?php echo $value["id"]; ?>" data-username="<?php echo $_SESSION["username"]; ?>"></i>
              </div>
-             <div class="request-reject" >
-               <i class="fas fa-times-circle" style="color:#FF6949;" data-id="<?php echo $value["id"]; ?>" data-username="<?php echo $_SESSION["username"]; ?>"></i>
+             <div>
+               <i class="fas fa-times-circle request-reject" style="color:#FF6949;" data-id="<?php echo $value["id"]; ?>" data-username="<?php echo $_SESSION["username"]; ?>"></i>
              </div>
 
            </div>
@@ -136,11 +136,13 @@ if (isset($_SESSION["username"])) {
 
               <a class="dropdown-item" href="#">nachricht1</a>
               <a class="dropdown-item" href="#">nachricht2</a>
+
             </div>
           </li>
           <?php
         }
          ?>
+
 
 
          <?php
@@ -168,15 +170,15 @@ if (isset($_SESSION["username"])) {
             ?>
             <li class="nav-item">
               <a class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="img/profile-pictures/2.png" alt="">
+                <img src="<?php echo $userV->getProfilePicture(); ?>" alt="">
               </a>
 
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="picture"><img src="img/profile-pictures/2.png"></a>
+                <a class="picture"><img src="<?php echo $userV->getProfilePicture(); ?>"></a>
                 <a class="dropdown-item" href="#"><?php echo $userV->getUserName(); ?></a>
-                <a class="dropdown-item" href="#"><?php echo $userV->getRoles() ?></a>
+                <a class="dropdown-item" href="#"><?php echo $userV->getRoles(); ?></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" href="profile.php?un=<?php echo $userV->getUserName(); ?>">Profile</a>
                 <a class="dropdown-item" href="#">Settings</a>
                 <a class="dropdown-item" href="./logout.php">Logout</a>
               </div>
@@ -318,10 +320,8 @@ notification
 
 
 
-<div class="searching-bar">
+<div class="searching-bar" id="searching-bar">
   <div class="sb_creator" id="sb_creator">
-
-
 
   </div>
 

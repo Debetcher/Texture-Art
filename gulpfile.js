@@ -37,7 +37,7 @@ const reload = (done) => {
 // Function for serve the dev server in borwsaer
 const serve = (done) => {
     browserSync.init({
-      proxy: "http://localhost/Texture-Art/dist/"
+      proxy: "localhost/Texture-Art/dist/"
     });
     done();
 };
@@ -45,7 +45,7 @@ const serve = (done) => {
 // Compile sass into css with gulp
 const css = () => {
     // Find SASS
-    return gulp.src(`${src}/sass/*.sass`)
+    return gulp.src(`${src}/sass/*.scss`)
         // Init Plumber
         .pipe(plumber())
         // Lint SASS
@@ -78,40 +78,6 @@ const css = () => {
         .pipe(browserSync.stream());
 };
 
-// Compile modules sass into css
-const modulecss = () => {
-    // Find SASS
-    return gulp.src(`${src}/**/**/*.sass`)
-        // Init Plumber
-        .pipe(plumber())
-        // Lint SASS
-        .pipe(sassLint({
-            options: {
-                formatter: 'stylish',
-            },
-            rules: {
-                'no-ids': 1,
-                'final-newline': 0,
-                'no-mergeable-selectors': 1,
-                'indentation': 0
-            }
-        }))
-        // Format SASS
-        .pipe(sassLint.format())
-        // Start Source Map
-        .pipe(sourcemaps.init())
-        // Compile SASS -> CSS
-        .pipe(sass.sync({ outputStyle: "compressed" })).on('error', sass.logError)
-
-        // Add Autoprefixer & cssNano
-        .pipe(postcss([autoprefixer(), cssnano()]))
-        // Write Source Map
-        .pipe(sourcemaps.write(''))
-        // Write everything to destination folder
-        .pipe(gulp.dest(`${dest}`))
-        // Reload Page
-        .pipe(browserSync.stream());
-};
 
 // Compile .html to minify .html
 const html = () => {
@@ -141,23 +107,7 @@ const php = () => {
         // Write everything to destination folder
         .pipe(gulp.dest(`${dest}`));
 };
-// const php2 = () => {
-//     // Find SASS
-//     return gulp.src(`${src}/*/*.php`)
-//         // Init Plumber
-//         .pipe(plumber())
-//         // Compile SASS -> CSS
-//         .pipe(htmlmin({
-//           collapseWhitespace: true,
-//           removeComments: true,
-//           html5: true,
-//           removeEmptyAttributes: true,
-//           removeTagWhitespace: true
-//
-//         }))
-//         // Write everything to destination folder
-//         .pipe(gulp.dest(`${dest}`));
-// };
+
 
 
 // Compile .js to minify .js
@@ -221,13 +171,13 @@ const modulescript = () => {
 };
 
 // Function to watch our Changes and refreash page
-const watch = () => gulp.watch([`${src}/*.html`, `${src}/**/**/**/*.php`, `${src}/**/**/*.js`, `${src}/**/**/*.sass`], gulp.series(css, modulecss, script, modulescript, html, php, reload));
+const watch = () => gulp.watch([`${src}/*.html`, `${src}/**/**/**/*.php`, `${src}/**/**/*.js`, `${src}/**/**/*.scss`], gulp.series(css, script, modulescript, html, php, reload));
 
 // All Tasks for this Project
-const dev = gulp.series(css, modulecss, modulescript, script, html, php, serve, watch);
+const dev = gulp.series(css, modulescript, script, html, php, serve, watch);
 
 // Just Build the Project
-const build = gulp.series(css, modulecss, modulescript, script, html, php);
+const build = gulp.series(css, modulescript, script, html, php);
 
 // Default function (used when type gulp)
 exports.dev = dev;

@@ -225,7 +225,7 @@ if (isset($errors['packname'])) {
 
 Invite Creators <br><br>
 
-<input type="text" name="username" class="form-control" data-parsley-username-exist> <br>
+<input type="text" name="username" class="form-control" data-parsley-username-exist required> <br>
 
 <input type="submit" name="submitIC" value="Invite" class="btn btn-primary"> <br> <br>
 
@@ -344,7 +344,7 @@ Members <br> <br>
 <!-- ################################################################################ -->
 <!-- ################################################################################ -->
 <!-- Formular Texturepack name Ingame -->
-
+<!--
 <form method="post" class="formular1">
 
 Texturepack name ingame <br><br>
@@ -418,7 +418,7 @@ Pack Title Ingame:<br>
 Pack Title:<br>
 <label id="IG-output"> </label><br>
 
-<!-- Fehlermeldung -->
+
 <?php
 if (isset($errors['packname-ig'])) {
   $validation->displayError($errors['packname-ig']);
@@ -427,7 +427,7 @@ if (isset($errors['packname-ig'])) {
 <br>
 <input type="submit" name="submitIGN" value="Update" class="btn btn-primary"> <br>
 
-</form>
+</form> -->
 
 
 

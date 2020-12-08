@@ -1,4 +1,3 @@
-<!-- Includes  -->
 <?php include "includes/autoloader.inc.php" ?>
 <?php include "includes/header.inc.php" ?>
 
@@ -27,7 +26,7 @@
 
 
 
-<form class="formular1" method="post" action="create-pack.php" enctype="multipart/form-data">
+<form class="formular1" method="post" action="formLogic/create-pack.php" enctype="multipart/form-data">
 
 <!-- Pack Name -->
 
@@ -78,7 +77,7 @@
 
   <div class="form-group form-drop-down">
     <label for="status">Status</label>
-    <select id="status" class="form-control" name="status">
+    <select id="status" class="custom-select" name="status">
 
       <?php
       $status = new Status\StatusContr;
@@ -94,7 +93,7 @@
 
   <div class="form-group form-drop-down">
     <label for="categorie">Categorie</label>
-    <select id="categorie" class="form-control" name="categorie">
+    <select id="categorie" class="custom-select" name="categorie">
       <?php
       $categorie = new PackCategorie\CategorieContr;
       $categorie->getAllCategories();
@@ -107,7 +106,7 @@
 
   <div class="form-group form-drop-down">
     <label for="version">Version</label>
-    <select id="version" class="form-control" name="version">
+    <select id="version" class="custom-select" name="version">
 
       <?php
       $version = new PackVersion\VersionContr;
@@ -124,7 +123,7 @@
 
   <div class="form-group form-drop-down">
     <label for="type">Type</label>
-    <select id="type" class="form-control" name="type">
+    <select id="type" class="custom-select" name="type">
       <?php
       $type = new PackType\TypeContr;
       $type->getAllTypes();
@@ -135,8 +134,11 @@
     </select>
   </div>
 
+  <button type="submit" name="submit" id="submitForm" class="btn btn-primary form-btn">Submit</button>
 
-  <button type="submit" name="submit" id="submitForm" class="btn btn-primary">Submit</button>
+  <a href="index.php"><div class="btn btn-danger form-btn">Cancel</div></a>
+
+
 
 </form>
 

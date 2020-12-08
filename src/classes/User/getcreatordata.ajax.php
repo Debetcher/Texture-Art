@@ -33,7 +33,8 @@ if ($chars != "") {
 
       <div class="cl-right">
 
-        <button type="button" class="btn-primary btn" name="button">Subscribe</button>
+        <button type="button" class="btn-primary btn btn-sm" name="button">Profile</button>
+        <button type="button" class="btn-primary btn btn-sm" name="button">Subscribe</button>
 
       </div>
 

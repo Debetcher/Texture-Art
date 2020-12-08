@@ -12,7 +12,7 @@ class UserView extends User {
   protected $password;
   protected $activation_key;
   protected $profile_picture;
-  protected $roles;
+  protected $role;
 
 
 
@@ -31,7 +31,8 @@ class UserView extends User {
 //Get Roles
 
     $rolectr = new \Role\RoleContr;
-    $this->roles = $rolectr->getRole($this->getID());
+    $this->role = $rolectr->getRole($this->getID());
+
 
 
   }
@@ -56,7 +57,12 @@ class UserView extends User {
   }
   public function getRoles(){
 
-    return $this->roles[0]["name"];
+    return $this->role[0]["name"];
+  }
+  public function getDownloads() {
+
+    return $this->db_getUserDownloads($this->username)[0]["downloads"];
+
   }
 
 

@@ -1,0 +1,54 @@
+@import "var";
+
+.topbar-profile-bar {
+  position: absolute;
+  width: 250px;
+  background: $second-bg;
+  left: calc(100vw - 320px);
+  top: 60px;
+  visibility: hidden;
+  padding-top: 15px;
+  box-shadow: 0px 0px 50px black;
+}
+
+.topbar-profile-bar ul {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.topbar-profile-bar ul a {
+  width: 100%;
+  text-decoration: none;
+}
+
+.topbar-profile-bar ul li {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 5px;
+  padding-left: 40px;
+}
+
+.topbar-profile-bar ul li:hover {
+  background: $fourth-bg;
+}
+
+.topbar-profile-bar ul img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 120px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.topbar-profile-bar ul .line {
+  width: 80%;
+  height: 2px;
+  background: white;
+  opacity: 0.5;
+}

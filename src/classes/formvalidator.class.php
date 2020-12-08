@@ -60,7 +60,7 @@ class FormValidator {
       $this->addError('username', 'username cannot be empty');
     } else {
       if(!preg_match('/^[a-zA-Z0-9 ]{3,20}$/', $val)){
-        $this->addError('username','username must be 6-12 chars & alphanumeric');
+        $this->addError('username','username must be 3-20 chars & alphanumeric');
       }
     }
 
@@ -90,7 +90,7 @@ class FormValidator {
       $this->addError('password', 'password cannot be empty');
     } else {
       if(!preg_match('/^.{6,20}$/', $val)){
-        $this->addError('password','password must be 6-12 chars');
+        $this->addError('password','password must be 6-20 chars');
       }
       else if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z]).{6,20}$/', $val)){
         $this->addError('password','password must contain 1 lowercalse and 1 uppercase');
@@ -131,8 +131,8 @@ class FormValidator {
     if(empty($val)){
       $this->addError('description', 'Description cannot be empty');
     } else {
-      if(!preg_match('/^[a-zA-Z0-9 ]{5,200}$/', $val)){
-        $this->addError('description','Description must be 5-200 chars & alphanumeric');
+      if(!preg_match('/^[a-zA-Z0-9 ]{1,255}$/', $val)){
+        $this->addError('description','Description must be 1-255 chars & alphanumeric');
       }
     }
 

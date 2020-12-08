@@ -1,4 +1,3 @@
-<!-- Includes  -->
 <?php include "includes/autoloader.inc.php" ?>
 <?php include "includes/header.inc.php" ?>
 
@@ -26,7 +25,6 @@
 <!-- Start Content -->
 
 
-<?php echo $_SESSION['username'] ?>
 
 <div class="packs-container">
 
@@ -37,41 +35,58 @@ $packs = new Pack\PackContr;
 
 foreach ($packs->getPacksByDate() as $key => $value) {
   ?>
-  <a href="#" style="text-decoration:none">
-  <div class="pack-container">
 
-    <div class="pack-image">
 
-      <img src=<?php echo $value["pack_picture"]; ?> >
+
+  <article class="pack-container">
+    <div class="pack-img">
+      <img src="<?php echo $value["pack_picture"]; ?>" alt="Cannot display image!">
     </div>
-    <div class="pack-title">
+    <div class="pack-name">
       <?php echo $value['name']; ?>
     </div>
-    <div class="pack-data">
+    <div class="pack-creators">
+      <?php
 
-      <div class="pack-creators">
+      foreach ($packs->getCreatorsByID($value['id']) as $keyCreate => $valueCreate) {
+        ?>
+          <a href="profile.php?un=<?php echo $valueCreate['username']; ?>">
+            <img src="<?php echo $valueCreate["profile_picture"]; ?>" alt="">
+            <p><?php echo $valueCreate["username"]; ?></p>
+            <br>
+          </a>
+
+
         <?php
 
-        foreach ($packs->getCreatorsByID($value['id']) as $keyCreate => $valueCreate) {
-          echo "<p>" . $valueCreate['username'] . "</p>";
-        }
+      }
 
-         ?>
+       ?>
+    </div>
+    <div class="pack-actions">
 
-      </div>
-      <div class="pack-dl">
-        <button type="button" class="btn btn-primary dwl-btn" name="button">Download</button>
-        <p><?php echo $value['downloads']; ?> Downloads</p>
-      </div>
+      <a href="pack.php?pack=<?php echo $value['id'] ?>"> <button type="button" class="btn btn-primary" name="see_more">See more</button> </a>
+      <a href="includes/download.inc.php?file_path=<?php echo $value['path'] ?>">
+        <button type="button" class="btn btn-primary" name="download">Download</button>
+        <p><?php echo $value['downloads'] . " Downloads" ?></p>
+      </a>
+
 
     </div>
 
-  </div>
-  </a>
+  </article>
 
-  <?php
+
+<?php
 }
+
  ?>
+
+
+
+
+
+
 
 
 

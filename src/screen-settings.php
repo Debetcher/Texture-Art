@@ -1,4 +1,3 @@
-<!-- Includes  -->
 <?php include "includes/autoloader.inc.php" ?>
 <?php include "includes/header.inc.php" ?>
 
@@ -101,6 +100,12 @@ if (isset($_POST['submitScreens']) && $file_array !== null) {
   }
 }
 
+if (isset($_POST["submitTPPicture"])) {
+
+  $screens->updateTitle($_POST["title"], $_POST["id"]);
+  $screens->updateDescription($_POST["desc"], $_POST["id"]);
+}
+
 
 //ändert die struktur der upgeloadeten files
 function reArrayFiles($file_post)
@@ -148,10 +153,12 @@ foreach ($screens->getScreensbyPackID($pack_id) as $key => $value) {
     <img class="screen-preview" src="<?php echo $value['path'] ?>" alt="">
     <br><br><br>
     Screen Title <br>
-    <input type="text" name="packname-ig" class="form-control" value="<?php echo $value['title'] ?>"> <br>
+    <input type="text" name="title" class="form-control" value="<?php echo $value['title'] ?>"> <br>
 
     Screen Description <br>
-    <input type="text" name="packname-ig" class="form-control" value="<?php echo $value['description'] ?>"> <br>
+    <input type="text" name="desc" class="form-control" value="<?php echo $value['description'] ?>"> <br>
+
+    <input type="hidden" name="id" value="<?php echo $value["id"]; ?>">
 
 
   <!-- Fehlermeldung -->

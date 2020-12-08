@@ -1,0 +1,100 @@
+@import "var";
+
+.packs-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+
+}
+
+.pack-container {
+  width: 300px;
+  height: 470px;
+  margin: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
+  position: relative;
+  background: $first-bg;
+}
+
+.pack-img {
+  width: 280px;
+  height: 280px;
+  margin-bottom: 10px;
+}
+
+.pack-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pack-name {
+  width: 100%;
+  height: 2em;
+  font-size: 1.5em;
+}
+
+.pack-creators {
+  position: absolute;
+  width: 140px;
+  height: 120px;
+  left: 0;
+  bottom: 0;
+  margin: 10px;
+
+
+}
+
+.pack-creators a {
+  padding-left: 5px;
+  display: flex;
+  height: 2em;
+  align-items: center;
+}
+
+.pack-creators a:hover {
+  text-decoration: none;
+  background-color: $third-bg;
+}
+
+.pack-creators a img {
+  width: 1.5em;
+  height: 1.5em;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.pack-creators a p {
+  margin: 0;
+  margin-left: 5px;
+}
+
+.pack-actions {
+  position: absolute;
+  width: 140px;
+  height: 120px;
+  right: 0;
+  bottom: 0;
+  margin: 10px;
+  margin-bottom: 0px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  flex-direction: column;
+
+}
+
+.pack-actions a {
+  text-decoration: none;
+}
+
+.pack-actions a p {
+  font-size: 0.8em;
+  text-align: center;
+  text-decoration: none;
+}

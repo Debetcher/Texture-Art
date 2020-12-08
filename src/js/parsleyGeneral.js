@@ -30,9 +30,9 @@ $('input[name="username"]').parsley({
 
 
 $('input[name="description"]').parsley({
-  minlength: 3,
-  maxlength: 15,
-  regexUsername: "/^[a-zA-Z0-9 ]{3,20}$/"
+  minlength: 1,
+  maxlength: 255,
+  regexUsername: "/^[a-zA-Z0-9 ]{1,255}$/"
 
 });
 
@@ -50,15 +50,39 @@ $('input[name="password"]').parsley({
 
 $('input[name="packname"]').parsley({
   minlength: 3,
-  maxlength: 15,
+  maxlength: 30,
   regexPackname: "/^[ A-Za-z0-9_@.#&+()]{3,30}$/"
 
 });
 
 $('input[name="packname-ig"]').parsley({
   minlength: 3,
-  maxlength: 15,
+  maxlength: 30,
   regexPackname: "/^[ A-Za-z0-9_@.#&+()]{3,30}$/"
+
+});
+
+$('input[name="tp-file"]').parsley({
+
+  fileExtension: 'zip'
+
+});
+
+$('input[name="tp-picture"]').parsley({
+
+  fileExtension: 'png.jpg'
+
+});
+
+$('input[name="profile-picture"]').parsley({
+
+  fileExtension: 'png.jpg'
+
+});
+
+$('input[name="banner"]').parsley({
+
+  fileExtension: 'png.jpg'
 
 });
 
@@ -230,3 +254,31 @@ window.Parsley
       en: 'Token is not correct!'
     }
           });
+
+
+
+
+
+  window.Parsley
+     .addValidator('fileExtension', {
+
+       validateString: function (value, requirement) {
+            var tagslistarr = requirement.split(',');
+            var fileExtension = value.split('.').pop();
+						var arr=[];
+						$.each(tagslistarr,function(i,val){
+   						 arr.push(val);
+						});
+            if(jQuery.inArray(fileExtension, arr)!='-1') {
+              console.log("is in array");
+              return true;
+            } else {
+              console.log("is NOT in array");
+              return false;
+            }
+
+     },
+     messages: {
+       en: 'Your File Extension is wrong.'
+     }
+           });

@@ -29,6 +29,22 @@ class Role extends \Database {
 
   }
 
+  protected function db_getRoleByUser($user_id){
+
+    $sql = "SELECT * FROM role
+            JOIN user_role ON role.id = user_role.role_id
+            JOIN user ON user.id = user_role.user_id
+            WHERE user.id = $user_id
+            ORDER BY role.important DESC
+            LIMIT 1";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute();
+
+    $results = $stmt->fetchAll();
+    return $results;
+
+  }
+
   protected function db_updateRole($id, $name){
 
     $sql = "UPDATE role SET name= ? WHERE id = ?";

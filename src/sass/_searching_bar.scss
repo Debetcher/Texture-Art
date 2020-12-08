@@ -1,0 +1,21 @@
+@import "var";
+
+.searching-bar {
+  position: absolute;
+  z-index: 11;
+  width: 40vw;
+  margin-top: 50px;
+  left: 30vw;
+
+  .sb_creator {
+    width: 100%;
+    background: $second-bg;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .sb_pack {
+    width: 100%;
+    background: $second-bg;
+    box-shadow: 0px 0px 50px black;
+  }
+}

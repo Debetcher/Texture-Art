@@ -1,4 +1,3 @@
-<!-- Includes  -->
 <?php include "includes/autoloader.inc.php" ?>
 <?php include "includes/header.inc.php" ?>
 
@@ -39,7 +38,7 @@ $screenContr = new Screen\ScreenContr;
   	<div class="pack-info-left">
 
       <div class="pack-info-left-left">
-        <img src="img/pack-picture/82.png" alt="">
+        <img src="<?php echo $packInstanz->getPackPicture(); ?>" alt="">
       </div>
       <div class="pack-info-left-right">
         <div class="pack-info-left-right-title">
@@ -50,8 +49,13 @@ $screenContr = new Screen\ScreenContr;
           <br>
           <?php
           foreach ($packInstanz->getCreator() as $key => $value) {
-            echo $value['username'];
-            echo "<br>";
+            ?>
+            <a href="profile.php?un=<?php echo $value['username']; ?>">
+              <img src="<?php echo $value["profile_picture"]; ?>" alt="">
+              <p><?php echo $value["username"]; ?></p>
+              <br>
+            </a>
+            <?php
           }
 
            ?>
@@ -66,24 +70,29 @@ $screenContr = new Screen\ScreenContr;
     <div class="pack-info-center">
 
       <div>
-        Downloads:<br>
-        <span>123.456</span>
+        Pack Type:<br>
+        <span><?php echo $packInstanz->getType(); ?></span>
 
       </div>
+
       <div>
-        Likes:<br>
-        <span>123.456</span>
+        Pack Version:<br>
+        <span><?php echo $packInstanz->getVersion(); ?></span>
 
       </div>
+
+
+
 
 
     </div>
     <div class="pack-info-right">
-      <div class="">
-        <i class="far fa-heart"></i>
-      </div>
-      <div class="">
+
+
+
+      <div class="dl">
         <button type="button" name="download" class="btn btn-primary">Download</button>
+        <p><?php echo $packInstanz->getDownloads() ?> Download</p>
       </div>
 
 
@@ -91,6 +100,12 @@ $screenContr = new Screen\ScreenContr;
 
 
 
+
+</div>
+
+<div class="pack-description">
+  <h1>Description</h1>
+  <?php echo $packInstanz->getDesc(); ?>
 
 </div>
 
@@ -170,6 +185,7 @@ $screenContr = new Screen\ScreenContr;
 <!-- ############################################### -->
 <!-- ############################################### -->
 
+<br>
 </div>
 
 <div class="content-right">

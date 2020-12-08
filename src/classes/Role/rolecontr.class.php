@@ -6,7 +6,14 @@ class RoleContr extends Role {
 
   public function getRole($user_id){
 
-    return $this->db_getRoles($user_id);
+    return $this->db_getRoleByUser($user_id);
+
+
+  }
+
+  public function getRoles($user_id){
+
+    return $this->db_getRolesByUser($user_id);
 
 
   }

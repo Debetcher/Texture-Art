@@ -1,0 +1,55 @@
+.IG-settings-container {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.IG-colors-container {
+  width: 120px;
+  height: 120px;
+  background: $third-bg;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.IG-colors-container div {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  margin: 5px;
+}
+
+.IG-colors-container div:hover {
+  width: 24px;
+  height: 24px;
+  border: 2px solid white;
+  margin: 3px;
+}
+
+.IG-color-selected {
+  width: 24px;
+  height: 24px;
+  border: 2px solid white;
+  margin: 3px;
+}
+
+.IG-formats-container {
+  width: 200px;
+  height: 150px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+#IG-Title-preview {
+  position: absolute;
+  z-index: 10;
+  color: black;
+  margin-left: 13px;
+  margin-top: -31px;
+}

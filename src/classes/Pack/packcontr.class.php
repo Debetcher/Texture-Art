@@ -16,10 +16,22 @@ class PackContr extends Pack{
 
   }
 
+  public function getPacksByUser($user_id){
+
+    return $this->db_getPacksByUser($user_id);
+
+  }
+
 
   public function getIDByName($name){
 
     return $this->db_getIDbyName($name);
+
+  }
+
+  public function getPackById($pack_id){
+
+    return $this->db_getPackById($pack_id);
 
   }
 
